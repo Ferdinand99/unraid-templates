@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<CommunityApplications>
+  <Profile>
+Unraid templates by Ferdinand99 — self-hosted community bots with a MEE6-style web dashboard, each one Node process in one container.
+
+**Sylo** — a multi-function Discord bot: moderation with a numbered case log, logging, tickets / modmail answered from the dashboard, reaction roles, verification, welcome messages, auto-moderation, leveling, temporary voice channels, giveaways, polls, Twitch / YouTube / Kick / RSS alerts and much more, with optional "Log in with Discord". Also available as a hosted bot at https://sylobot.com.
+
+**Sylo-Fluxer** (beta) — Sylo ported to Fluxer (https://fluxer.app): the same modules and dashboard, prefix commands (! by default) and "Log in with Fluxer". Some features don't work as expected yet — see its README.
+
+State lives in a single SQLite file on a mounted volume, snapshotted automatically and restorable from the dashboard.
+
+**Support:** open an issue on the app's repository — https://github.com/Ferdinand99/Sylo/issues or https://github.com/Ferdinand99/Sylo-Fluxer/issues
+  </Profile>
+  <Icon>https://raw.githubusercontent.com/Ferdinand99/Sylo/main/unraid/sylo-icon.png</Icon>
+  <WebPage>https://github.com/Ferdinand99/unraid-templates</WebPage>
+</CommunityApplications>
