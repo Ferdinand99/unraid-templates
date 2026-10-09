@@ -8,6 +8,7 @@ repository.
 | --- | --- | --- |
 | [`templates/sylo.xml`](templates/sylo.xml) | [Sylo](https://github.com/Ferdinand99/Sylo) — multi-function Discord bot with a web dashboard | `docker.io/iwgamin/sylo` |
 | [`templates/sylo-fluxer.xml`](templates/sylo-fluxer.xml) | [Sylo-Fluxer](https://github.com/Ferdinand99/Sylo-Fluxer) — Sylo ported to Fluxer (**beta**) | `ghcr.io/ferdinand99/sylo-fluxer` |
+| [`templates/tofarr.xml`](templates/tofarr.xml) | [Tofarr](https://github.com/Ferdinand99/Tofarr) — unofficial companion that builds and updates Tofa collections | `ghcr.io/ferdinand99/tofarr` |
 
 ## Install
 
@@ -23,7 +24,8 @@ https://github.com/Ferdinand99/unraid-templates
 
 Open an issue on the app's own repository:
 [Sylo](https://github.com/Ferdinand99/Sylo/issues) ·
-[Sylo-Fluxer](https://github.com/Ferdinand99/Sylo-Fluxer/issues).
+[Sylo-Fluxer](https://github.com/Ferdinand99/Sylo-Fluxer/issues) ·
+[Tofarr](https://github.com/Ferdinand99/Tofarr/issues).
 
 ## Maintaining
 
