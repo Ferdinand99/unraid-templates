@@ -113,6 +113,26 @@ Setup: open the web UI and create your login, then open Settings and enter your 
     Required="false"
     Mask="false"></Config>
   <Config
+    Name="PUID"
+    Target="PUID"
+    Default="99"
+    Mode=""
+    Description="User id the app runs as, so files in the config folder get the right owner. 99 is Unraid's nobody."
+    Type="Variable"
+    Display="advanced"
+    Required="false"
+    Mask="false">99</Config>
+  <Config
+    Name="PGID"
+    Target="PGID"
+    Default="100"
+    Mode=""
+    Description="Group id the app runs as. 100 is Unraid's users group."
+    Type="Variable"
+    Display="advanced"
+    Required="false"
+    Mask="false">100</Config>
+  <Config
     Name="Timezone"
     Target="TZ"
     Default="Europe/Oslo"
