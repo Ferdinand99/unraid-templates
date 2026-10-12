@@ -3,15 +3,13 @@
   <Profile>
 Unraid templates by Ferdinand99 — self-hosted apps with a web UI, each one in one container.
 
-**Sylo** — a multi-function Discord bot: moderation with a numbered case log, logging, tickets / modmail answered from the dashboard, reaction roles, verification, welcome messages, auto-moderation, leveling, temporary voice channels, giveaways, polls, Twitch / YouTube / Kick / RSS alerts and much more, with optional "Log in with Discord". Also available as a hosted bot at https://sylobot.com.
-
-**Sylo-Fluxer** (beta) — Sylo ported to Fluxer (https://fluxer.app): the same modules and dashboard, prefix commands (! by default) and "Log in with Fluxer". Some features don't work as expected yet — see its README.
+**Sylo** — a multi-function bot for Discord and Fluxer: moderation with a numbered case log, logging, tickets / modmail answered from the dashboard, reaction roles, verification, welcome messages, auto-moderation, leveling, temporary voice channels, giveaways, polls, Twitch / YouTube / Kick / RSS alerts and much more, with optional "Log in with Discord" and "Log in with Fluxer". Runs on Discord, on Fluxer (experimental), or on both from one container. Also available as a hosted Discord bot at https://sylobot.com.
 
 **Tofarr** — an unofficial companion for the Tofa media server: build Tofa collections from TMDB, Trakt and IMDb lists, keep them in order and up to date on a schedule, browse a Discover page with posters, and request missing titles through Seerr. Protected by a login you create on first start.
 
 State lives in a single SQLite file on a mounted volume.
 
-**Support:** open an issue on the app's repository — https://github.com/Ferdinand99/Sylo/issues or https://github.com/Ferdinand99/Sylo-Fluxer/issues or https://github.com/Ferdinand99/Tofarr/issues
+**Support:** open an issue on the app's repository — https://github.com/Ferdinand99/Sylo/issues or https://github.com/Ferdinand99/Tofarr/issues
   </Profile>
   <Icon>https://raw.githubusercontent.com/Ferdinand99/Sylo/main/unraid/sylo-icon.png</Icon>
   <WebPage>https://github.com/Ferdinand99/unraid-templates</WebPage>
