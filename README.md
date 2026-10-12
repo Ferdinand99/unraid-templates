@@ -6,8 +6,7 @@ repository.
 
 | Template | App | Image |
 | --- | --- | --- |
-| [`templates/sylo.xml`](templates/sylo.xml) | [Sylo](https://github.com/Ferdinand99/Sylo) — multi-function Discord bot with a web dashboard | `docker.io/iwgamin/sylo` |
-| [`templates/sylo-fluxer.xml`](templates/sylo-fluxer.xml) | [Sylo-Fluxer](https://github.com/Ferdinand99/Sylo-Fluxer) — Sylo ported to Fluxer (**beta**) | `ghcr.io/ferdinand99/sylo-fluxer` |
+| [`templates/sylo.xml`](templates/sylo.xml) | [Sylo](https://github.com/Ferdinand99/Sylo) — multi-function bot for Discord and Fluxer with a web dashboard | `docker.io/iwgamin/sylo` |
 | [`templates/tofarr.xml`](templates/tofarr.xml) | [Tofarr](https://github.com/Ferdinand99/Tofarr) — unofficial companion that builds and updates Tofa collections | `ghcr.io/ferdinand99/tofarr` |
 
 ## Install
@@ -24,8 +23,14 @@ https://github.com/Ferdinand99/unraid-templates
 
 Open an issue on the app's own repository:
 [Sylo](https://github.com/Ferdinand99/Sylo/issues) ·
-[Sylo-Fluxer](https://github.com/Ferdinand99/Sylo-Fluxer/issues) ·
 [Tofarr](https://github.com/Ferdinand99/Tofarr/issues).
+
+## Sylo-Fluxer
+
+The separate Sylo-Fluxer fork and its template are gone: [Sylo](https://github.com/Ferdinand99/Sylo)
+4.0 runs on Fluxer itself. Install the **Sylo** template and fill in the `FLUXER_*` settings, with or
+without the Discord ones. The old fork is archived, and its data does not carry over; see
+[Coming from Sylo-Fluxer](https://github.com/Ferdinand99/Sylo/blob/main/docs/fluxer.md#coming-from-sylo-fluxer).
 
 ## Maintaining
 
