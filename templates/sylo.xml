@@ -9,7 +9,7 @@
   <Privileged>false</Privileged>
   <Support>https://github.com/Ferdinand99/Sylo/issues</Support>
   <Project>https://github.com/Ferdinand99/Sylo</Project>
-  <Overview>Sylo is a multi-function bot for Discord and Fluxer with a web dashboard. It runs on Discord, on Fluxer, or on both from one container (Fluxer support is experimental). It has a per-guild module system (34 modules) - moderation with warning thresholds and a numbered case log (/history, /case), server logging, tickets/modmail answered from the dashboard, reaction roles &amp; autoroles, verification (Verify button or Cloudflare Turnstile captcha), welcome/leave messages, a Welcome Channel builder, birthday announcements, sticky messages, auto-moderation (invite/link/flood/mention/caps/word filters, optionally pushed to Discord's native AutoMod), a counting mini-game, action-based custom slash commands, an autoresponder, reminders (one-off or recurring channel posts), leveling (text + optional voice XP, per-role/channel multipliers, all-time/weekly/monthly public leaderboard), AFK, server statistics (live-count voice channels), server insights (activity charts - messages, joins/leaves and voice-channel usage over time), a free games notifier (Epic Games Store, plus more stores with an IsThereAnyDeal key), ban appeals (banned members get a DM'd link to an appeal form; staff accept/deny from the dashboard), MEE6-style temporary voice channels ("join to create" hubs plus /voice-* control commands), a starboard (re-posts messages that get enough of a reaction into a highlights channel), an invite tracker (credits who invited each member and ranks inviters), reaction polls (/poll with a timer or vote cap), prize giveaways (Enter button, auto-drawn winners), optional Battlefield-series and RuneScape (OSRS/RS3) player stats (/stats, gated by the Game stats module), Twitch / YouTube / Kick go-live &amp; new-video alerts (with an optional "delete the message when the stream ends" mode), RSS/Atom feed alerts (plus Reddit / Mastodon / Bluesky handles), scheduled channel cleanup (auto-delete messages older than a threshold from a channel, on a weekly schedule you pick), and a message/embed creator - plus per-server command management, a Prometheus /metrics endpoint (a ready-made Grafana dashboard ships in the repo), and an editable Discord presence/activity. State is stored in a single SQLite file under /app/data and survives updates. The database is snapshotted automatically (before every schema migration and on a schedule) into /app/data/backups - optionally shipped off-site as well (WebDAV and/or a Discord webhook; see BACKUP_WEBDAV_URL / BACKUP_WEBHOOK_URL); from the dashboard's Health page you can also create, download, import and restore a snapshot (restore swaps the file and lets the container restart on the restored data).
+  <Overview>Sylo is a multi-function bot for Discord and Fluxer with a web dashboard. It runs on Discord, on Fluxer, or on both from one container (Fluxer support is experimental). It has a per-guild module system (35 modules) - moderation with warning thresholds and a numbered case log (/history, /case), server logging, tickets/modmail answered from the dashboard, reaction roles &amp; autoroles, verification (Verify button or Cloudflare Turnstile captcha), welcome/leave messages, a Welcome Channel builder, birthday announcements, sticky messages, auto-moderation (invite/link/flood/mention/caps/word filters, optionally pushed to Discord's native AutoMod), a counting mini-game, action-based custom slash commands, an autoresponder, reminders (one-off or recurring channel posts), leveling (text + optional voice XP, per-role/channel multipliers, all-time/weekly/monthly public leaderboard), AFK, server statistics (live-count voice channels), server insights (activity charts - messages, joins/leaves and voice-channel usage over time), a free games notifier (Epic Games Store, plus more stores with an IsThereAnyDeal key), ban appeals (banned members get a DM'd link to an appeal form; staff accept/deny from the dashboard), MEE6-style temporary voice channels ("join to create" hubs plus /voice-* control commands), a starboard (re-posts messages that get enough of a reaction into a highlights channel), an invite tracker (credits who invited each member and ranks inviters), reaction polls (/poll with a timer or vote cap), prize giveaways (Enter button, auto-drawn winners), optional Battlefield-series and RuneScape (OSRS/RS3) player stats (/stats, gated by the Game stats module), Twitch / YouTube / Kick go-live &amp; new-video alerts (with an optional "delete the message when the stream ends" mode), RSS/Atom feed alerts (plus Reddit / Mastodon / Bluesky handles), scheduled channel cleanup (auto-delete messages older than a threshold from a channel, on a weekly schedule you pick), and a message/embed creator - plus per-server command management, a Prometheus /metrics endpoint (a ready-made Grafana dashboard ships in the repo), and an editable Discord presence/activity. State is stored in a single SQLite file under /app/data and survives updates (Postgres is optional, see DATABASE_URL). The database is snapshotted automatically (before every schema migration and on a schedule) into /app/data/backups - optionally shipped off-site as well (WebDAV and/or a Discord webhook, optionally encrypted; see BACKUP_WEBDAV_URL / BACKUP_WEBHOOK_URL / BACKUP_ENCRYPTION_KEY); from the dashboard's Health page you can also create, download, import and restore a snapshot (restore swaps the file and lets the container restart on the restored data).
 
 Setup (Discord): create a Discord application at https://discord.com/developers/applications, then set DISCORD_TOKEN (Bot tab) and DISCORD_CLIENT_ID (General Information). Invite the bot with the scopes "bot" and "applications.commands".
 
@@ -18,6 +18,8 @@ Setup (Fluxer): create an application on your Fluxer instance and set FLUXER_TOK
 Intents (Discord only; Fluxer has none): the member/message-driven modules (logging, welcome, reaction roles, verification, leveling, server statistics, invite tracker, auto-moderation, counting, autoresponder, starboard) need the "Server Members" and/or "Message Content" intents enabled on the Developer Portal Bot page. Leave INTENT_GUILD_MEMBERS / INTENT_MESSAGE_CONTENT at their defaults, or set one to false to boot without that intent (its modules stay unavailable).
 
 Dashboard: runs open by default (use only on a trusted LAN). To require a login for server admins, set DISCORD_CLIENT_SECRET ("Log in with Discord") and/or FLUXER_CLIENT_SECRET ("Log in with Fluxer") and add http://[UNRAID-IP]:[HOST-PORT]/auth/discord/callback and/or http://[UNRAID-IP]:[HOST-PORT]/auth/fluxer/callback to the app's OAuth redirect URLs. One dashboard account can hold both logins. Put your own ids in OWNER_IDS (Discord) and FLUXER_OWNER_IDS (Fluxer), or nobody can open the Health page once login is on.
+
+Sylo app (iOS): the native app signs in to your instance with the same Discord/Fluxer login (needs DISCORD_CLIENT_SECRET or FLUXER_CLIENT_SECRET and DASHBOARD_URL). Ticket notifications reach the phone through the hosted relay (PUSH_RELAY_URL); operators also get the Health page and dev-log notifications. See https://github.com/Ferdinand99/Sylo/blob/main/docs/mobile-app.md
 
 Community &amp; support: https://discord.gg/GAzR9k5hhS</Overview>
   <Category>Tools: Network:Messenger</Category>
@@ -136,7 +138,7 @@ Community &amp; support: https://discord.gg/GAzR9k5hhS</Overview>
     Name="OWNER_IDS"
     Target="OWNER_IDS"
     Default=""
-    Description="Your Discord user id(s), comma-separated. With Discord login on, only these accounts can open the Health page (status, error log, database backup / restore)."
+    Description="Your Discord user id(s), comma-separated: the operators of this Sylo. With Discord login on, only these accounts can open the Health page (status, error log, database backup / restore), here and in the Sylo app, and get its dev-log notifications."
     Type="Variable"
     Display="always"
     Required="false"
@@ -148,6 +150,15 @@ Community &amp; support: https://discord.gg/GAzR9k5hhS</Overview>
     Description="Your Fluxer user id(s), comma-separated: the Fluxer counterpart of OWNER_IDS."
     Type="Variable"
     Display="always"
+    Required="false"
+    Mask="false"/>
+  <Config
+    Name="DEV_LOG_CHANNEL_ID"
+    Target="DEV_LOG_CHANNEL_ID"
+    Default=""
+    Description="Optional. A Discord channel id where Sylo posts its own errors (a dev log, separate from any server's logging channel). Errors and warnings are also stored and shown on the Health page in the Sylo app, with or without this channel."
+    Type="Variable"
+    Display="advanced"
     Required="false"
     Mask="false"/>
   <Config
@@ -199,11 +210,38 @@ Community &amp; support: https://discord.gg/GAzR9k5hhS</Overview>
     Name="DASHBOARD_URL"
     Target="DASHBOARD_URL"
     Default=""
-    Description="Optional. The public dashboard URL (e.g. https://sylo.example.com or http://[UNRAID-IP]:[HOST-PORT]). Needed behind a reverse proxy for the OAuth2 redirect URI, and to build the links members open for verification-captcha and ban appeals. Leave blank for direct IP access without those features."
+    Description="Optional. The public dashboard URL (e.g. https://sylo.example.com or http://[UNRAID-IP]:[HOST-PORT]). Needed behind a reverse proxy for the OAuth2 redirect URI, for the Sylo app, and to build the links members open for verification-captcha and ban appeals. With it set, X-Forwarded-For is trusted from one proxy on a private address (see TRUST_PROXY). Leave blank for direct IP access without those features."
     Type="Variable"
     Display="advanced"
     Required="false"
     Mask="false"/>
+  <Config
+    Name="TRUST_PROXY"
+    Target="TRUST_PROXY"
+    Default=""
+    Description="Optional. Which reverse proxies may tell Sylo the client's address (X-Forwarded-For). Blank: with DASHBOARD_URL set, one proxy on a loopback or private address (another container, your LAN). Set false, a hop count, or the proxy's addresses/subnets for other setups, e.g. a proxy on another server."
+    Type="Variable"
+    Display="advanced"
+    Required="false"
+    Mask="false"/>
+  <Config
+    Name="ALLOW_PRIVATE_URLS"
+    Target="ALLOW_PRIVATE_URLS"
+    Default="false"
+    Description="Optional. Set to true to let server admins use RSS feeds and welcome-card images on your own network (127.0.0.1, 192.168.x, 10.x ...). Off by default, because those URLs are fetched by the server."
+    Type="Variable"
+    Display="advanced"
+    Required="false"
+    Mask="false">false</Config>
+  <Config
+    Name="PUSH_RELAY_URL"
+    Target="PUSH_RELAY_URL"
+    Default="https://app.sylobot.com"
+    Description="Where this instance sends Sylo app notifications (the hosted relay; it passes them to Apple and keeps no copy). Leave at https://app.sylobot.com; empty turns app notifications off."
+    Type="Variable"
+    Display="advanced"
+    Required="false"
+    Mask="false">https://app.sylobot.com</Config>
   <Config
     Name="TURNSTILE_SITE_KEY"
     Target="TURNSTILE_SITE_KEY"
@@ -295,6 +333,15 @@ Community &amp; support: https://discord.gg/GAzR9k5hhS</Overview>
     Required="false"
     Mask="false">/app/data/sylo.db</Config>
   <Config
+    Name="DATABASE_URL"
+    Target="DATABASE_URL"
+    Default=""
+    Description="Optional. A postgres:// URL to use Postgres instead of the SQLite file (hosted-scale deployments). Leave blank for SQLite. See https://github.com/Ferdinand99/Sylo/blob/main/docs/postgres.md"
+    Type="Variable"
+    Display="advanced"
+    Required="false"
+    Mask="true"/>
+  <Config
     Name="BACKUP_INTERVAL_HOURS"
     Target="BACKUP_INTERVAL_HOURS"
     Default="24"
@@ -325,7 +372,7 @@ Community &amp; support: https://discord.gg/GAzR9k5hhS</Overview>
     Name="BACKUP_WEBDAV_URL"
     Target="BACKUP_WEBDAV_URL"
     Default=""
-    Description="Optional. Off-site backups: a WebDAV folder URL (e.g. a Nextcloud path like https://cloud.example.com/remote.php/dav/files/me/sylo-backups). After every local snapshot a gzipped copy is PUT to &lt;url&gt;/&lt;name&gt;.db.gz. Best-effort and logged; never blocks the local backup."
+    Description="Optional. Off-site backups: a WebDAV folder URL (e.g. a Nextcloud path like https://cloud.example.com/remote.php/dav/files/me/sylo-backups). After every local snapshot a gzipped copy is PUT to &lt;url&gt;/&lt;name&gt;.db.gz. With a username it must be https (or a LAN / container address). Best-effort and logged; never blocks the local backup."
     Type="Variable"
     Display="advanced"
     Required="false"
@@ -357,6 +404,51 @@ Community &amp; support: https://discord.gg/GAzR9k5hhS</Overview>
     Display="advanced"
     Required="false"
     Mask="true"/>
+  <Config
+    Name="BACKUP_ENCRYPTION_KEY"
+    Target="BACKUP_ENCRYPTION_KEY"
+    Default=""
+    Description="Optional. A long passphrase: off-site copies (WebDAV / webhook) then leave encrypted (AES-256-GCM, &lt;name&gt;.db.gz.enc). Keep it somewhere else too; without it they cannot be read. Decrypt with: node scripts/decrypt-backup.js"
+    Type="Variable"
+    Display="advanced"
+    Required="false"
+    Mask="true"/>
+  <Config
+    Name="APPLE_KEY_ID"
+    Target="APPLE_KEY_ID"
+    Default=""
+    Description="Optional. App Store Connect API key id for the owner-only App Store Connect module (alerts about your own apps). Leave blank if you don't publish iOS/macOS apps."
+    Type="Variable"
+    Display="advanced"
+    Required="false"
+    Mask="false"/>
+  <Config
+    Name="APPLE_ISSUER_ID"
+    Target="APPLE_ISSUER_ID"
+    Default=""
+    Description="Optional. Issuer id of a team App Store Connect API key (blank for an individual key)."
+    Type="Variable"
+    Display="advanced"
+    Required="false"
+    Mask="false"/>
+  <Config
+    Name="APPLE_PRIVATE_KEY"
+    Target="APPLE_PRIVATE_KEY"
+    Default=""
+    Description="Optional. The App Store Connect key's .p8 file: PEM on one line with literal \n line breaks, or base64."
+    Type="Variable"
+    Display="advanced"
+    Required="false"
+    Mask="true"/>
+  <Config
+    Name="APPLE_VENDOR_NUMBER"
+    Target="APPLE_VENDOR_NUMBER"
+    Default=""
+    Description="Optional. Your App Store Connect vendor number (Sales and Trends), for the downloads digest."
+    Type="Variable"
+    Display="advanced"
+    Required="false"
+    Mask="false"/>
   <Config
     Name="WEB_PORT"
     Target="WEB_PORT"
