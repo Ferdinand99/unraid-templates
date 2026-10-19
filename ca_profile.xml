@@ -7,9 +7,11 @@ Unraid templates by Ferdinand99 — self-hosted apps with a web UI, each one in 
 
 **Tofarr** — an unofficial companion for the Tofa media server: build Tofa collections from TMDB, Trakt and IMDb lists, keep them in order and up to date on a schedule, browse a Discover page with posters, and request missing titles through Seerr. Protected by a login you create on first start.
 
+**Vigilant Vole** — a lightweight uptime monitor and Uptime Kuma alternative: HTTP, keyword, TCP, ping, DNS, push, Docker and more, alerts to 24 services plus Apprise, public status pages with incidents and badges, maintenance windows, two-factor login and remote probe agents that confirm outages before alerting.
+
 State lives in a single SQLite file on a mounted volume.
 
-**Support:** open an issue on the app's repository — https://github.com/Ferdinand99/Sylo/issues or https://github.com/Ferdinand99/Tofarr/issues
+**Support:** open an issue on the app's repository — https://github.com/Ferdinand99/Sylo/issues, https://github.com/Ferdinand99/Tofarr/issues or https://github.com/Ferdinand99/Vigilant-Vole/issues
   </Profile>
   <Icon>https://raw.githubusercontent.com/Ferdinand99/Sylo/main/unraid/sylo-icon.png</Icon>
   <WebPage>https://github.com/Ferdinand99/unraid-templates</WebPage>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Vigilant-Vole</Name>
+  <Repository>ghcr.io/ferdinand99/vigilant-vole:latest</Repository>
+  <Registry>https://github.com/Ferdinand99/Vigilant-Vole/pkgs/container/vigilant-vole</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/Ferdinand99/Vigilant-Vole/issues</Support>
+  <Project>https://github.com/Ferdinand99/Vigilant-Vole</Project>
+  <Overview>Vigilant Vole is a lightweight, self-hosted uptime monitor written in Rust - an Uptime Kuma alternative in one small image (about 18 MB compressed, a few MB of RAM).
+
+Monitors: HTTP(S), keyword, JSON query, TCP port, ping, DNS, push/heartbeat, Docker container, WebSocket, TLS certificate and domain expiry, NTP and Steam game servers, plus groups. Alerts go to 24 notification services (Discord, Slack, Telegram, email, ntfy, Gotify, Pushover, Teams, Matrix, PagerDuty and more), and Apprise covers 90+ others, with retries, reminders, escalation and flap detection.
+
+Also included: public status pages with custom domains, incidents and badges; maintenance windows; multi-user roles with two-factor login; remote probe agents that confirm an outage from another network before alerting; Docker label auto-discovery; a REST API, config as code (YAML/JSON) and an Uptime Kuma importer; Prometheus metrics with Kuma-compatible names. English and Norwegian interface.
+
+Setup: open the WebUI after the first start and create the admin account. Everything lives in one SQLite file under /data (appdata). Map the Docker socket only if you want Docker container monitors or label discovery.</Overview>
+  <Category>Network:Management Tools:Utilities</Category>
+  <WebUI>http://[IP]:[PORT:3001]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/Ferdinand99/unraid-templates/main/templates/vigilant-vole.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/Ferdinand99/Vigilant-Vole/main/assets/unraid-icon.png</Icon>
+  <ExtraParams>--cap-add=NET_RAW</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled/>
+  <DonateText/>
+  <DonateLink/>
+  <Requires>For Docker container monitors and label discovery, map the Docker socket below. The container picks up the socket's group by itself.</Requires>
+  <Config Name="WebUI port" Target="3001" Default="3001" Mode="tcp" Description="Web interface, API, status pages and /metrics." Type="Port" Display="always" Required="true" Mask="false">3001</Config>
+  <Config Name="Data" Target="/data" Default="/mnt/user/appdata/vigilant-vole" Mode="rw" Description="SQLite database, session key and backups. Ownership is set to PUID:PGID on every start." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/vigilant-vole</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Description="User id the app runs as (Unraid: 99 = nobody)." Type="Variable" Display="advanced" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Description="Group id the app runs as (Unraid: 100 = users)." Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
+  <Config Name="Docker socket (optional)" Target="/var/run/docker.sock" Default="" Mode="ro" Description="Only needed for Docker container monitors and label auto-discovery. Leave empty to disable." Type="Path" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="VV_TRUST_PROXY" Target="VV_TRUST_PROXY" Default="0" Description="Set to 1 when the WebUI is only reachable through a reverse proxy (SWAG, Nginx Proxy Manager, Traefik) that sets X-Forwarded-* headers." Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
+  <Config Name="VV_CONFIG_FILE" Target="VV_CONFIG_FILE" Default="" Description="Optional path (inside the container, e.g. /data/vigilant.yml) to a YAML/JSON config file merged into the database on every start." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="RUST_LOG" Target="RUST_LOG" Default="info" Description="Log level filter." Type="Variable" Display="advanced" Required="false" Mask="false">info</Config>
+</Container>

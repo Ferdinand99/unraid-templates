@@ -8,6 +8,7 @@ repository.
 | --- | --- | --- |
 | [`templates/sylo.xml`](templates/sylo.xml) | [Sylo](https://github.com/Ferdinand99/Sylo) — multi-function bot for Discord and Fluxer with a web dashboard | `docker.io/iwgamin/sylo` |
 | [`templates/tofarr.xml`](templates/tofarr.xml) | [Tofarr](https://github.com/Ferdinand99/Tofarr) — unofficial companion that builds and updates Tofa collections | `ghcr.io/ferdinand99/tofarr` |
+| [`templates/vigilant-vole.xml`](templates/vigilant-vole.xml) | [Vigilant Vole](https://github.com/Ferdinand99/Vigilant-Vole) — lightweight uptime monitor with status pages, an Uptime Kuma alternative | `ghcr.io/ferdinand99/vigilant-vole` |
 
 ## Install
 
@@ -23,7 +24,8 @@ https://github.com/Ferdinand99/unraid-templates
 
 Open an issue on the app's own repository:
 [Sylo](https://github.com/Ferdinand99/Sylo/issues) ·
-[Tofarr](https://github.com/Ferdinand99/Tofarr/issues).
+[Tofarr](https://github.com/Ferdinand99/Tofarr/issues) ·
+[Vigilant Vole](https://github.com/Ferdinand99/Vigilant-Vole/issues).
 
 ## Sylo-Fluxer
 
