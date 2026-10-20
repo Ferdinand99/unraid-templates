@@ -11,7 +11,7 @@
   <Project>https://github.com/Ferdinand99/Vigilant-Vole</Project>
   <Overview>Vigilant Vole is a lightweight, self-hosted uptime monitor written in Rust - an Uptime Kuma alternative in one small image (about 18 MB compressed, a few MB of RAM).
 
-Monitors: HTTP(S), keyword, JSON query, TCP port, ping, DNS, push/heartbeat, Docker container, WebSocket, TLS certificate and domain expiry, NTP and Steam game servers, plus groups. Alerts go to 24 notification services (Discord, Slack, Telegram, email, ntfy, Gotify, Pushover, Teams, Matrix, PagerDuty and more), and Apprise covers 90+ others, with retries, reminders, escalation and flap detection.
+Monitors: HTTP(S) (basic, OAuth2 or client-certificate auth), keyword, JSON query, TCP port, ping, DNS, push/heartbeat, Docker container, WebSocket, TLS, certificate and domain expiry, NTP, Steam game servers, PostgreSQL, MySQL/MariaDB, Redis, MQTT, Kafka, RabbitMQ, gRPC, SMTP, RADIUS and SNMP, plus groups. Alerts go to 24 notification services (Discord, Slack, Telegram, email, ntfy, Gotify, Pushover, Teams, Matrix, PagerDuty and more), and Apprise covers 90+ others, with retries, reminders, escalation and flap detection.
 
 Also included: public status pages with custom domains, incidents and badges; maintenance windows; multi-user roles with two-factor login; remote probe agents that confirm an outage from another network before alerting; Docker label auto-discovery; a REST API, config as code (YAML/JSON) and an Uptime Kuma importer; Prometheus metrics with Kuma-compatible names. English and Norwegian interface.
 
