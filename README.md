@@ -9,6 +9,8 @@ repository.
 | [`templates/keen-kestrel.xml`](templates/keen-kestrel.xml) | [Keen Kestrel](https://github.com/Ferdinand99/Keen-Kestrel) — self-hosted, Sentry-compatible error tracking and cookieless analytics | `ghcr.io/ferdinand99/keen-kestrel` |
 | [`templates/sylo.xml`](templates/sylo.xml) | [Sylo](https://github.com/Ferdinand99/Sylo) — multi-function bot for Discord and Fluxer with a web dashboard | `docker.io/iwgamin/sylo` |
 | [`templates/tofarr.xml`](templates/tofarr.xml) | [Tofarr](https://github.com/Ferdinand99/Tofarr) — unofficial companion that builds and updates Tofa collections | `ghcr.io/ferdinand99/tofarr` |
+| [`templates/wise-wren.xml`](templates/wise-wren.xml) | [Wise Wren](https://github.com/Ferdinand99/Wise-Wren) — keeps your Docker containers up to date, with snapshots, health checks and rollback (the server) | `ghcr.io/ferdinand99/wise-wren` |
+| [`templates/wise-wren-agent.xml`](templates/wise-wren-agent.xml) | Wise Wren Agent — runs on each server Wren updates; gets the Docker socket, so it is root-equivalent | `ghcr.io/ferdinand99/wise-wren-agent` |
 | [`templates/vigilant-vole.xml`](templates/vigilant-vole.xml) | [Vigilant Vole](https://github.com/Ferdinand99/Vigilant-Vole) — lightweight uptime monitor with status pages, an Uptime Kuma alternative | `ghcr.io/ferdinand99/vigilant-vole` |
 
 ## Install
@@ -27,7 +29,8 @@ Open an issue on the app's own repository:
 [Keen Kestrel](https://github.com/Ferdinand99/Keen-Kestrel/issues) ·
 [Sylo](https://github.com/Ferdinand99/Sylo/issues) ·
 [Tofarr](https://github.com/Ferdinand99/Tofarr/issues) ·
-[Vigilant Vole](https://github.com/Ferdinand99/Vigilant-Vole/issues).
+[Vigilant Vole](https://github.com/Ferdinand99/Vigilant-Vole/issues) ·
+[Wise Wren](https://github.com/Ferdinand99/Wise-Wren/issues).
 
 ## Sylo-Fluxer
 

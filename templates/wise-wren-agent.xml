@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Wise-Wren-Agent</Name>
+  <Repository>ghcr.io/ferdinand99/wise-wren-agent:latest</Repository>
+  <Registry>https://github.com/Ferdinand99/Wise-Wren/pkgs/container/wise-wren-agent</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/Ferdinand99/Wise-Wren/issues</Support>
+  <Project>https://hedgerow.tools/Wise-Wren/</Project>
+  <Overview>The agent for Wise Wren: it runs on each server Wren keeps up to date. It connects out to your Wise Wren server (no ports are opened), reports what runs on this server, and carries out the updates and rollbacks someone approved in Wren, with a snapshot first and a health check after.
+
+ROOT-EQUIVALENT: this container gets the Docker socket, and access to the Docker socket is root access to the whole server. It also runs as root and mounts Unraid's /boot/config so it can update template containers the way Unraid does. Only install it if you trust your Wise Wren server and everyone who can sign in to it as editor or admin, and keep its token secret.
+
+What limits it: Wren can never send a command line, only ask for an approved update of a named target. The agent re-checks every job against Docker and its own agent.toml (in the Config folder): which folders it may touch (roots) and, with [updates] allow/deny, which containers and stacks may be updated at all. Without [updates], every target may be updated once someone approves it in Wren.
+
+Setup: in Wren, Servers, Add server; copy the token into WW_AGENT_TOKEN and Wren's address into WW_SERVER_URL. Keep the paths as they are: every folder Wren touches must be mounted at the same path inside the agent. If your appdata pool isn't called cache, add its /mnt/POOL/appdata at the same path. Snapshots are rollback points, not backups.</Overview>
+  <Category>Tools:Utilities</Category>
+  <WebUI/>
+  <TemplateURL>https://raw.githubusercontent.com/Ferdinand99/unraid-templates/main/templates/wise-wren-agent.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/Ferdinand99/Wise-Wren/main/assets/brand/wren-icon.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled/>
+  <DonateText/>
+  <DonateLink/>
+  <Requires>Early release (v0.1). A running Wise Wren server (template Wise-Wren) and this server's agent token from it. Root-equivalent: it gets the Docker socket.</Requires>
+  <Config Name="WW_SERVER_URL" Target="WW_SERVER_URL" Default="" Description="Your Wise Wren server's address, e.g. http://192.168.1.10:3003." Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="WW_AGENT_TOKEN" Target="WW_AGENT_TOKEN" Default="" Description="This server's agent token (wwa_...), shown once in Wren under Servers when you add the server or make a new token." Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="Config" Target="/config" Default="/mnt/user/appdata/wren-agent" Mode="rw" Description="agent.toml (optional): roots, [updates] allow/deny and script stacks. See docs/agent.md in the Wise Wren repository." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/wren-agent</Config>
+  <Config Name="Docker socket" Target="/var/run/docker.sock" Default="/var/run/docker.sock" Mode="rw" Description="Root-equivalent: the agent reads and recreates containers through it." Type="Path" Display="always" Required="true" Mask="false">/var/run/docker.sock</Config>
+  <Config Name="Appdata (share)" Target="/mnt/user/appdata" Default="/mnt/user/appdata" Mode="rw" Description="Same path inside and outside: Compose folders and the data Wren snapshots." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata</Config>
+  <Config Name="Appdata (pool)" Target="/mnt/cache/appdata" Default="/mnt/cache/appdata" Mode="rw" Description="Same path: the share's real pool, so snapshots are fast reflink copies. Change both sides if your pool has another name." Type="Path" Display="always" Required="true" Mask="false">/mnt/cache/appdata</Config>
+  <Config Name="Unraid config" Target="/boot/config" Default="/boot/config" Mode="rw" Description="Same path: Unraid's container templates and Compose Manager projects, for updating template containers the way Unraid does." Type="Path" Display="advanced" Required="true" Mask="false">/boot/config</Config>
+  <Config Name="Unraid web scripts" Target="/usr/local/emhttp" Default="/usr/local/emhttp" Mode="ro" Description="Same path, read-only: Unraid's update_container script." Type="Path" Display="advanced" Required="true" Mask="false">/usr/local/emhttp</Config>
+  <Config Name="Unraid state" Target="/var/local/emhttp" Default="/var/local/emhttp" Mode="rw" Description="Same path: Unraid's update status, kept in sync after an update." Type="Path" Display="advanced" Required="true" Mask="false">/var/local/emhttp</Config>
+  <Config Name="Docker data" Target="/var/lib/docker" Default="/var/lib/docker" Mode="rw" Description="Same path: what Unraid's scripts read about images and containers." Type="Path" Display="advanced" Required="true" Mask="false">/var/lib/docker</Config>
+  <Config Name="TZ" Target="TZ" Default="Europe/Oslo" Description="Time zone for log timestamps." Type="Variable" Display="advanced" Required="false" Mask="false">Europe/Oslo</Config>
+  <Config Name="RUST_LOG" Target="RUST_LOG" Default="info" Description="Log level filter." Type="Variable" Display="advanced" Required="false" Mask="false">info</Config>
+</Container>
