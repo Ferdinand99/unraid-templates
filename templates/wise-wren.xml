@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Wise-Wren</Name>
+  <Repository>ghcr.io/ferdinand99/wise-wren:latest</Repository>
+  <Registry>https://github.com/Ferdinand99/Wise-Wren/pkgs/container/wise-wren</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/Ferdinand99/Wise-Wren/issues</Support>
+  <Project>https://hedgerow.tools/Wise-Wren/</Project>
+  <Overview>Wise Wren keeps the Docker containers on your servers up to date, without surprises. One small Rust binary with SQLite.
+
+It finds what runs on each server (containers, Unraid template containers, Compose stacks and script-updated stacks), checks the registries for new versions on your schedule and tells you through ~40 notification services (ntfy, email, Discord and more). It updates only what you approve, now or at a time you choose, or what you explicitly allow inside an automatic window. Every update: the new image pulled first, a snapshot of the data, a health check after, and an automatic rollback if it fails. With Vigilant Vole 0.9.0 or later, updates open maintenance windows and use your monitors as part of the health check.
+
+This is the server (web UI, API, database). Each Docker host also needs the Wise Wren Agent template; add the server under Servers in Wren first to get its token.
+
+Also: a REST API with OpenAPI, MCP tools, users with roles and two-factor sign-in, 26 languages.
+
+Setup: open the WebUI after the first start and create the admin account. Set WW_PUBLIC_URL to the address the agents use. Snapshots are rollback points, not backups: keep your own backups. Everything lives in /data (appdata).</Overview>
+  <Category>Tools:Utilities Network:Management</Category>
+  <WebUI>http://[IP]:[PORT:3003]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/Ferdinand99/unraid-templates/main/templates/wise-wren.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/Ferdinand99/Wise-Wren/main/assets/brand/wren-icon.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled/>
+  <DonateText/>
+  <DonateLink/>
+  <Requires>Early release (v0.1). Each server Wren looks after needs the Wise Wren Agent container.</Requires>
+  <Config Name="WebUI port" Target="3003" Default="3003" Mode="tcp" Description="Web interface, REST API, MCP and the agents' endpoint." Type="Port" Display="always" Required="true" Mask="false">3003</Config>
+  <Config Name="Data" Target="/data" Default="/mnt/user/appdata/wise-wren" Mode="rw" Description="wren.sqlite, the session key (which also seals registry passwords and the Vigilant Vole token) and pre-migration backups. Ownership is set to PUID:PGID on every start." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/wise-wren</Config>
+  <Config Name="WW_PUBLIC_URL" Target="WW_PUBLIC_URL" Default="" Description="The address agents and people use, e.g. http://192.168.1.10:3003 or https://wren.example.com. Used in the agents' docker run lines and notification links. Without it, each request's own address is used." Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="WW_TRUST_PROXY" Target="WW_TRUST_PROXY" Default="0" Description="Set to 1 when Wren is reached through a reverse proxy or tunnel (SWAG, Nginx Proxy Manager, Traefik, Pangolin) that sets X-Forwarded-* headers." Type="Variable" Display="always" Required="false" Mask="false">0</Config>
+  <Config Name="WW_SETUP_TOKEN" Target="WW_SETUP_TOKEN" Default="" Description="Optional. When set, the first-run /setup page only opens with ?token=VALUE, so nobody else can create the admin account." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="PUID" Target="PUID" Default="99" Description="User id the app runs as (Unraid: 99 = nobody)." Type="Variable" Display="advanced" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Description="Group id the app runs as (Unraid: 100 = users)." Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
+  <Config Name="TZ" Target="TZ" Default="Europe/Oslo" Description="Time zone for log timestamps (pages use Settings, General, time zone)." Type="Variable" Display="advanced" Required="false" Mask="false">Europe/Oslo</Config>
+  <Config Name="RUST_LOG" Target="RUST_LOG" Default="info" Description="Log level filter." Type="Variable" Display="advanced" Required="false" Mask="false">info</Config>
+</Container>
