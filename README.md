@@ -6,6 +6,7 @@ repository.
 
 | Template | App | Image |
 | --- | --- | --- |
+| [`templates/keen-kestrel.xml`](templates/keen-kestrel.xml) | [Keen Kestrel](https://github.com/Ferdinand99/Keen-Kestrel) — self-hosted, Sentry-compatible error tracking and cookieless analytics | `ghcr.io/ferdinand99/keen-kestrel` |
 | [`templates/sylo.xml`](templates/sylo.xml) | [Sylo](https://github.com/Ferdinand99/Sylo) — multi-function bot for Discord and Fluxer with a web dashboard | `docker.io/iwgamin/sylo` |
 | [`templates/tofarr.xml`](templates/tofarr.xml) | [Tofarr](https://github.com/Ferdinand99/Tofarr) — unofficial companion that builds and updates Tofa collections | `ghcr.io/ferdinand99/tofarr` |
 | [`templates/vigilant-vole.xml`](templates/vigilant-vole.xml) | [Vigilant Vole](https://github.com/Ferdinand99/Vigilant-Vole) — lightweight uptime monitor with status pages, an Uptime Kuma alternative | `ghcr.io/ferdinand99/vigilant-vole` |
@@ -23,6 +24,7 @@ https://github.com/Ferdinand99/unraid-templates
 ## Support
 
 Open an issue on the app's own repository:
+[Keen Kestrel](https://github.com/Ferdinand99/Keen-Kestrel/issues) ·
 [Sylo](https://github.com/Ferdinand99/Sylo/issues) ·
 [Tofarr](https://github.com/Ferdinand99/Tofarr/issues) ·
 [Vigilant Vole](https://github.com/Ferdinand99/Vigilant-Vole/issues).

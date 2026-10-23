@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Keen-Kestrel</Name>
+  <Repository>ghcr.io/ferdinand99/keen-kestrel:latest</Repository>
+  <Registry>https://github.com/Ferdinand99/Keen-Kestrel/pkgs/container/keen-kestrel</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/Ferdinand99/Keen-Kestrel/issues</Support>
+  <Project>https://hedgerow.tools/Keen-Kestrel/</Project>
+  <Overview>Keen Kestrel is self-hosted error tracking and privacy-friendly analytics in one small Rust binary with SQLite: no Kafka, ClickHouse, Redis or Postgres.
+
+Errors: point the official Sentry SDKs (Swift/iOS, JavaScript, Python, Rust, Go and more) at Kestrel's DSN. Events are scrubbed of personal data and grouped into issues with search, stack traces, resolve/ignore/merge, alerts to ~40 notification services, release health (crash-free sessions and users), and iOS/macOS crash symbolication from dSYMs uploaded with sentry-cli.
+
+Analytics: cookieless web analytics with the 1 KB k.js snippet, and app signals from the KestrelKit Swift package. No IP addresses or user agents are stored, and Global Privacy Control is respected.
+
+Also: a REST API with OpenAPI, MCP tools for coding assistants, users with roles and two-factor login, 26 languages.
+
+Setup: open the WebUI after the first start and create the admin account. Set KK_PUBLIC_URL to the address your apps and sites use (it goes into DSNs, the k.js snippet and alert links). Behind a reverse proxy, set KK_TRUST_PROXY to 1. Everything lives in two SQLite files under /data (appdata).</Overview>
+  <Category>Tools:Utilities Network:Management</Category>
+  <WebUI>http://[IP]:[PORT:3002]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/Ferdinand99/unraid-templates/main/templates/keen-kestrel.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/Ferdinand99/Keen-Kestrel/main/assets/brand/kestrel-icon.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled/>
+  <DonateText/>
+  <DonateLink/>
+  <Requires>Early release (v0.1). To receive events from phones and websites, Kestrel must be reachable from the internet over HTTPS, for example through a reverse proxy or tunnel; set KK_PUBLIC_URL to that address.</Requires>
+  <Config Name="WebUI port" Target="3002" Default="3002" Mode="tcp" Description="Web interface, API, ingest (Sentry SDKs, KestrelKit, k.js) and sentry-cli uploads." Type="Port" Display="always" Required="true" Mask="false">3002</Config>
+  <Config Name="Data" Target="/data" Default="/mnt/user/appdata/keen-kestrel" Mode="rw" Description="kestrel.sqlite, store.sqlite, uploaded debug files, session key and pre-migration backups. Ownership is set to PUID:PGID on every start." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/keen-kestrel</Config>
+  <Config Name="KK_PUBLIC_URL" Target="KK_PUBLIC_URL" Default="" Description="The public address apps and sites use, e.g. https://kestrel.example.com. Used in DSNs, the k.js snippet and alert links. Without it, each request's own address is used." Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="KK_TRUST_PROXY" Target="KK_TRUST_PROXY" Default="0" Description="Set to 1 when Kestrel is reached through a reverse proxy or tunnel (SWAG, Nginx Proxy Manager, Traefik, Pangolin) that sets X-Forwarded-* headers." Type="Variable" Display="always" Required="false" Mask="false">0</Config>
+  <Config Name="KK_SETUP_TOKEN" Target="KK_SETUP_TOKEN" Default="" Description="Optional. When set, the first-run /setup page only opens with ?token=VALUE, so nobody else can create the admin account on an exposed instance." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="Ingest port (optional)" Target="KK_INGEST_PORT" Default="" Description="Optional second port inside the container that serves only ingest and /healthz, so the admin UI can stay on the LAN. Also map that port below if you use it." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="PUID" Target="PUID" Default="99" Description="User id the app runs as (Unraid: 99 = nobody)." Type="Variable" Display="advanced" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Description="Group id the app runs as (Unraid: 100 = users)." Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
+  <Config Name="TZ" Target="TZ" Default="Europe/Oslo" Description="Time zone for log timestamps." Type="Variable" Display="advanced" Required="false" Mask="false">Europe/Oslo</Config>
+  <Config Name="RUST_LOG" Target="RUST_LOG" Default="info" Description="Log level filter." Type="Variable" Display="advanced" Required="false" Mask="false">info</Config>
+</Container>
